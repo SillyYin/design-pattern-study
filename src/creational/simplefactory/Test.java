@@ -8,8 +8,11 @@ package creational.simplefactory;
  */
 public class Test {
     public static void main(String[] args) {
-        // 父类声明子类实现
-        Video video = new JavaVideo();
+        VideoFactory videoFactory = new VideoFactory();
+        Video video = videoFactory.getVideo("java");
+        if (video == null) {
+            return;
+        }
         video.produce();
     }
 }
