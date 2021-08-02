@@ -8,17 +8,17 @@ package creational.simplefactory;
  */
 public class VideoFactory {
     /**
-     * 根据type返回相应的子类实现
-     * @param type
+     * 使用反射来实现一个简单工厂
+     * @param c
      * @return
      */
-    public Video getVideo(String type) {
-        if ("java".equalsIgnoreCase(type)) {
-            return new JavaVideo();
+    public Video getVideo(Class c) {
+        Video video = null;
+        try {
+            video = (Video) Class.forName(c.getName()).newInstance();
+        } catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
+            e.printStackTrace();
         }
-        if ("python".equalsIgnoreCase(type)) {
-            return new PythonVideo();
-        }
-        return null;
+        return video;
     }
 }
