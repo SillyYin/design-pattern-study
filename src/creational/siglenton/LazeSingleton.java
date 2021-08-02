@@ -13,7 +13,12 @@ public class LazeSingleton {
 
     }
 
-    public static LazeSingleton getInstance() {
+    /**
+     * synchronized锁在静态方法中则是锁的类文件
+     * synchronized锁在非静态方法中锁的是对象
+     * @return
+     */
+    public synchronized static LazeSingleton getInstance() {
         if (lazeSingleton == null) {
             lazeSingleton = new LazeSingleton();
         }
