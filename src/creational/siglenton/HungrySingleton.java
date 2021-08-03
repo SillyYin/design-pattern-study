@@ -18,4 +18,8 @@ public class HungrySingleton implements Serializable {
     public static HungrySingleton getInstance() {
         return instance;
     }
+
+    private Object readResolve() {
+        return instance;
+    }
 }
