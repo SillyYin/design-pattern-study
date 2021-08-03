@@ -1,6 +1,8 @@
 package creational.siglenton;
 
 import java.io.*;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 
 /**
  * @author yinrongjie
@@ -9,15 +11,13 @@ import java.io.*;
  * @date 2021/8/2
  */
 public class Test {
-    public static void main(String[] args) throws IOException, ClassNotFoundException {
+    public static void main(String[] args) throws NoSuchMethodException, InvocationTargetException,
+            InstantiationException, IllegalAccessException {
+        Class objectClass = HungrySingleton.class;
+        Constructor constructor = objectClass.getDeclaredConstructor();
+        constructor.setAccessible(true);
         HungrySingleton instance = HungrySingleton.getInstance();
-        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("singleton_file"));
-        oos.writeObject(instance);
-
-        File file = new File("singleton_file");
-        ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file));
-
-        HungrySingleton newInstance = (HungrySingleton) ois.readObject();
+        HungrySingleton newInstance = (HungrySingleton) constructor.newInstance();
         System.out.println(instance);
         System.out.println(newInstance);
         System.out.println(instance == newInstance);
