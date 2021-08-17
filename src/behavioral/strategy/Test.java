@@ -8,9 +8,8 @@ package behavioral.strategy;
  */
 public class Test {
     public static void main(String[] args) {
-        PromotionActivity promotionActivity = new PromotionActivity(new LiJianPromotionStrategy());
-        PromotionActivity promotionActivity1 = new PromotionActivity(new FanXianPromotionStrategy());
+        String promotionKey = "LIJIAN";
+        PromotionActivity promotionActivity = new PromotionActivity(PromotionStrategyFactory.getPromotionStrategy(promotionKey));
         promotionActivity.executePromotionStrategy();
-        promotionActivity1.executePromotionStrategy();
     }
 }
